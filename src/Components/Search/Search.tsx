@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { tmdbAPI } from 'src/apis/base.api'
 import getParamsString from 'src/Hooks/getParamsString'
-import Button from '../Button/Button'
+import Button from '../Button'
 import MovieCard from '../MovieCard'
 import FooterBg from 'src/assets/Image/footer-bg.jpg'
 

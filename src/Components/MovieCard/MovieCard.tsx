@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { resultType } from 'src/types/typeResponseMovie'
 import { ImgC } from 'src/Utils/image'
-import Button from '../Button/Button'
+import Button from '../Button'
 
 interface Props {
   category: 'tv' | 'movie'
