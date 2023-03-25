@@ -58,12 +58,12 @@ export default function Slider() {
         grabCursor={true}
         spaceBetween={10}
         slot={'wrapper-end'}
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false
-        // }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false
+        }}
         loop={true}
-        wrapperClass='items-end border-[2px]'
+        wrapperClass='items-end'
       >
         {movies.map((item, index) => {
           const background = ImgC.origin(item.backdrop_path)

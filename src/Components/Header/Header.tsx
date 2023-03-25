@@ -55,7 +55,7 @@ export default function Header() {
               />
             </Link>
           </div>
-          <div className='flex justify-between bg-black sm:bg-transparent items-center sm:static fixed bottom-0 w-full sm:w-fit mb-0'>
+          <div className='flex justify-between pb-6 sm:pb-0 bg-black sm:bg-transparent items-center sm:static fixed bottom-0 w-full sm:w-fit mb-0'>
             {/* nhung tag */}
             {headerNav.map((item, index) => {
               return (
