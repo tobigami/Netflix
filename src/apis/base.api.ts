@@ -21,12 +21,12 @@ export const tvType = {
 }
 
 export const tmdbAPI = {
-  getMovieList: (type: keyof typeof movieType, params = {}) => {
+  getMovieList: (type: keyof typeof movieType, params : {}) => {
     const url = 'movie/' + movieType[type]
     return http.get<resTypeMovieList>(url, { params: params })
   },
 
-  getTvList: (type: keyof typeof tvType, params = {}) => {
+  getTvList: (type: keyof typeof tvType, params = { page: 1 }) => {
     const url = 'tv/' + tvType[type]
     return http.get(url, { params: params })
   },

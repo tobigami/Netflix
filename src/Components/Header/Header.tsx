@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router-dom'
 import { routePath } from 'src/Constant/routePath'
 import classNames from 'classnames'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
   const headerNav = [
@@ -17,10 +18,33 @@ export default function Header() {
       display: 'Tv Series'
     }
   ]
+
+  const [scroll, setScroll] = useState(false)
+
+  useEffect(() => {
+    const eventScroll = () => {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        return setScroll(true)
+      } else setScroll(false)
+    }
+    window.addEventListener('scroll', eventScroll)
+    return () => {
+      window.removeEventListener('scroll', eventScroll)
+    }
+  }, [])
   return (
-    <div className='h-32 sticky top-0 left-0 right-0 z-10'>
+    <div
+      className={classNames('sticky top-0 left-0 right-0 z-30 transition-all duration-1000', {
+        'bg-black': scroll
+      })}
+    >
       <div className='container'>
-        <div className='flex items-center justify-between py-8 h-full'>
+        <div
+          className={classNames('flex items-center justify-between h-full transition-all duration-300', {
+            'py-4': scroll,
+            'py-8': !scroll
+          })}
+        >
           {/* logo */}
           <div className='w-full sm:w-fit flex justify-center'>
             <Link to={routePath.home}>
@@ -31,7 +55,7 @@ export default function Header() {
               />
             </Link>
           </div>
-          <div className='flex justify-between   items-center sm:static fixed bottom-0 w-full sm:w-fit sm:mb-0 mb-2'>
+          <div className='flex justify-between bg-black sm:bg-transparent items-center sm:static fixed bottom-0 w-full sm:w-fit mb-0'>
             {/* nhung tag */}
             {headerNav.map((item, index) => {
               return (

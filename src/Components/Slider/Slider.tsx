@@ -8,6 +8,7 @@ import 'swiper/css'
 import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../Modal'
+import classNames from 'classnames'
 
 export default function Slider() {
   const [showModal, setShowModal] = useState(false)
@@ -57,10 +58,10 @@ export default function Slider() {
         grabCursor={true}
         spaceBetween={10}
         slidesPerView={1}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false
-        }}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false
+        // }}
         loop={true}
       >
         {movies.map((item, index) => {
@@ -71,7 +72,7 @@ export default function Slider() {
               {({ isActive }) => (
                 // bg image
                 <div
-                  className='relative py-36 w-full bg-center bg-cover bg-no-repeat
+                  className='relative sm:py-36 pt-28 pb-20 w-full bg-center bg-cover bg-no-repeat
                   before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:bg-black before:opacity-60
                   after:absolute after:content-[""] after:w-full after:h-[100px] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-[#0f0f0f] after:to-transparent
                   '
@@ -82,13 +83,41 @@ export default function Slider() {
                   {/* container */}
                   <div className='flex items-center justify-center relative container'>
                     {/* info */}
-                    <div className='w-[55%] mx-12 relative'>
+                    <div className='lg:w-[55%] w-[100%] sm:mx-12 mx-4 relative'>
                       {/* title */}
-                      <h2 className='text-[5rem] font-bold'>{item.title}</h2>
+                      <h2
+                        className={classNames(
+                          'xl:text-[5rem] lg:text-[4rem] md:text-[3rem] text-[2rem] font-bold  transition-all ease-in-out duration-500',
+                          {
+                            'opacity-0 -translate-y-28': !isActive,
+                            'opacity-100 translate-y-0': isActive
+                          }
+                        )}
+                      >
+                        {item.title}
+                      </h2>
                       {/* overview */}
-                      <div className='mt-12 font-bold leading-6'>{item.overview}</div>
+                      <div
+                        className={classNames(
+                          'sm:mt-12 mt-6 font-bold sm:text-base text-sm leading-6 transition-all ease-in-out duration-500 delay-300',
+                          {
+                            'opacity-0 translate-y-[-100px]': !isActive,
+                            'opacity-100 translate-y-0': isActive
+                          }
+                        )}
+                      >
+                        {item.overview}
+                      </div>
                       {/* btn */}
-                      <div className='flex items-center mt-12'>
+                      <div
+                        className={classNames(
+                          'flex items-center sm:mt-12 mt-6 transition-all ease-in-out duration-500 delay-700',
+                          {
+                            'opacity-0 translate-y-[-100px]': !isActive,
+                            'opacity-100 translate-y-0': isActive
+                          }
+                        )}
+                      >
                         <Button
                           btnType='Normal'
                           onClick={() => {
@@ -104,7 +133,12 @@ export default function Slider() {
                     </div>
 
                     {/* poster */}
-                    <div className='flex-1'>
+                    <div
+                      className={classNames('flex-1 transition-all hidden lg:block duration-1000', {
+                        'scale-100': isActive,
+                        'scale-0': !isActive
+                      })}
+                    >
                       <img
                         className='shadow-custom rounded-[30px] w-[400px] transition-all scale-100 duration-700 ease-in-out'
                         src={ImgC.w500(item.poster_path)}

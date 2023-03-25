@@ -1,5 +1,6 @@
 import React from 'react'
+import Movie from '../Movie'
 
 export default function TvSeries() {
-  return <div className='container'>TvSeries</div>
+  return <Movie />
 }

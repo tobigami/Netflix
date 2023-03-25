@@ -24,7 +24,7 @@ module.exports = {
     plugins(function ({ addComponents }) {
       addComponents({
         '.container': {
-          maxWidth: 1660 + 'px',
+          maxWidth: 1280 + 'px',
           margin: 'auto'
         }
       })

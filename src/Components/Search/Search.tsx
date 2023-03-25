@@ -1,49 +1,45 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { tmdbAPI } from 'src/apis/base.api'
-import { movieType } from 'src/apis/base.api'
-import Button from 'src/Components/Button/Button'
-import MovieCard from 'src/Components/MovieCard'
-import Search from 'src/Components/Search'
+import getParamsString from 'src/Hooks/getParamsString'
+import Button from '../Button/Button'
+import MovieCard from '../MovieCard'
 import FooterBg from 'src/assets/Image/footer-bg.jpg'
 
-export default function Movie() {
-  const [page, setPage] = useState(1)
+export default function Search() {
   const { pathname } = useLocation()
-  const [params] = useSearchParams()
-  const paramObj = Object.fromEntries([...params])
-  const type = pathname.split('/')[1]
-  const category = pathname.split('/')[2] === undefined ? 'popular' : pathname.split('/')[2]
-  const navigate = useNavigate()
-
-  const [list, setList] = useState([])
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        let res = null
-        if (type === 'movie') {
-          res = await tmdbAPI.getMovieList(category as keyof typeof movieType, { page: page })
-        } else if (type === 'tv') {
-          res = await tmdbAPI.getTvList(category as keyof typeof movieType, { page: page })
-        }
-        setList([...list, ...(res?.data.results as [])])
-      } catch (error) {}
-    }
-    getList()
-  }, [page, category, type])
-
+  const type = pathname.split('/')[2]
+  const paramsObj = getParamsString()
+  const [data, setData] = useState([])
   const [search, setSearch] = useState('')
+  const [keyword, setKeyword] = useState(paramsObj.query)
+  const [page, setPage] = useState(Number(paramsObj.page))
+  useEffect(() => {
+    console.log('goi lai useEffect')
+    const getSearch = async () => {
+      const res = await tmdbAPI.search(type as 'movie' | 'tv', { query: keyword, page: page })
+      setData([...data, ...(res.data.results as [])])
+    }
+    getSearch()
+  }, [keyword, type, page])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (search.trim().length > 0) {
-      navigate(`/search/${type}?page=1&query=${search}`)
+      console.log('nhay vao day')
+      setKeyword(search)
+      setData([])
     }
   }
 
   const handleLoadMore = () => {
     setPage(page + 1)
   }
+
+  console.log('page', page)
+
+  if (data.length < 0) return null
+
   return (
     <div>
       <div
@@ -55,7 +51,7 @@ export default function Movie() {
         anh
       </div>
       <div className='container'>
-        <form className='flex justify-center sm:justify-start mb-8 mt-8' onSubmit={handleSubmit}>
+        <form className='flex mb-8 mt-8 sm:justify-start justify-center' onSubmit={handleSubmit}>
           <input
             onChange={(e) => {
               setSearch(e.target.value)
@@ -70,8 +66,8 @@ export default function Movie() {
             search
           </Button>
         </form>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4'>
-          {list.map((value, index) => {
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4'>
+          {data.map((value, index) => {
             return (
               <div className='col-span-1' key={index}>
                 <MovieCard category={type as 'movie' | 'tv'} item={value} />
@@ -80,7 +76,7 @@ export default function Movie() {
           })}
         </div>
         <div className='text-center mt-12'>
-          <Button btnType='OutLine' btnSize='sm' onClick={handleLoadMore}>
+          <Button onClick={handleLoadMore} btnType='OutLine' btnSize='sm'>
             Load more
           </Button>
         </div>

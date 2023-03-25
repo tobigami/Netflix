@@ -27,7 +27,7 @@ export default function Video({ id, type }: Props) {
       {videos.map((value: any) => {
         return (
           <div key={value.id}>
-            <h2 className='text-2xl font-bold mt-8'>{value.name}</h2>
+            <h2 className='sm:text-2xl text-base font-bold mt-8'>{value.name}</h2>
             <Iframe link={`https://www.youtube.com/embed/${value.key}`} />
           </div>
         )
@@ -44,7 +44,6 @@ function Iframe({ link }: PropsIframe) {
   useEffect(() => {
     const height = ((iframeRef.current?.offsetWidth as number) * 9) / 16 + 'px'
     iframeRef.current?.setAttribute('height', height)
-    console.log('height', height)
   }, [iframeRef])
 
   return <iframe ref={iframeRef} className='w-full' src={link}></iframe>

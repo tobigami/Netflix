@@ -15,7 +15,6 @@ export default function Similar({ type, id }: Props) {
       try {
         const res = await tmdbAPI.similar(type as 'movie' | 'tv', Number(id))
         setSimilar(res.data.results)
-        console.log('res', res)
         return res
       } catch (error) {}
     }

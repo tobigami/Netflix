@@ -22,7 +22,7 @@ export default function MovieListHorizontal({ category, type, title }: Props) {
       try {
         let res = null
         if (category === 'movie') {
-          res = await tmdbAPI.getMovieList(type)
+          res = await tmdbAPI.getMovieList(type, {})
         } else if (category === 'tv') {
           res = await tmdbAPI.getTvList(type)
         }
@@ -33,10 +33,10 @@ export default function MovieListHorizontal({ category, type, title }: Props) {
   }, [])
   if (item.length < 0) return null
   return (
-    <div>
-      <div className='flex items-center justify-between py-12'>
-        <h2 className='font-bold text-2xl capitalize'>{title}</h2>
-        <Link to={routePath[category]}>
+    <div className='z-20 relative'>
+      <div className='flex items-center justify-between sm:py-12 py-6 px-4'>
+        <h2 className='font-bold sm:text-2xl text-xl capitalize'>{title}</h2>
+        <Link to={`/${category}/${type}`}>
           <Button btnSize='sm' btnType='OutLine'>
             view more
           </Button>
@@ -58,7 +58,7 @@ export const SwiperComponent = ({ type, movies }: SwiperProps) => {
     <Swiper grabCursor={true} spaceBetween={10} slidesPerView={'auto'}>
       {movies.map((value, index) => {
         return (
-          <SwiperSlide key={index} className='w-[15%]'>
+          <SwiperSlide key={index} className='xl:w-[15%] lg:w-[22%] sm:w-[35%] w-[50%]'>
             <MovieCard category={type} item={value} />
           </SwiperSlide>
         )

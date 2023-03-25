@@ -14,7 +14,7 @@ export default function Cast({ id, type }: Props) {
     const getCredits = async () => {
       try {
         const res = await tmdbAPI.credits(type as 'movie' | 'tv', Number(id))
-        setCast(res.data.cast.slice(0, 5))
+        setCast(res.data.cast.slice(0, 6))
       } catch (error) {}
     }
     getCredits()
@@ -25,7 +25,7 @@ export default function Cast({ id, type }: Props) {
   return (
     <div>
       <div className='font-semibold text-xl mb-4'>Casts</div>
-      <div className='grid grid-cols-7 gap-4'>
+      <div className='grid xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-4'>
         {cast.map((value: any, index) => {
           return (
             <div key={index} className='col-span-1'>

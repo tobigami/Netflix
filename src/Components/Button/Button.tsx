@@ -11,8 +11,8 @@ export default function Button({ btnType = 'OutLine', btnSize = 'md', children, 
     <div className={className}>
       <button
         className={classNames('text-white  rounded-[30px] font-[600]  cursor-pointer', {
-          'py-1 px-6 border-[2px] text-[1rem] text-center': btnSize === 'sm',
-          'px-[1.8rem] py-2 border-[2px] text-[1.5rem]': btnSize === 'md',
+          'py-1 px-1 sm:px-6 border-[2px] sm:text-[1rem] text-xs text-center': btnSize === 'sm',
+          'px-2 sm:px-[1.8rem] py-2 border-[2px] sm:text-[1.5rem]': btnSize === 'md',
           'hover:text-primary hover:bg-white transition-colors duration-300 bg-transparent border-white':
             btnType === 'OutLine',
           'border-primary bg-primary shadow-before hover:shadow-after transition-shadow duration-300':

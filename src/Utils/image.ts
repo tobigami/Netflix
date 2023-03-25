@@ -6,6 +6,6 @@ export const ImgC = {
   },
 
   w500: (path: string) => {
-    return path ? `https://image.tmdb.org/t/p/w500${path}` : NoImage
+    return `https://image.tmdb.org/t/p/w500${path}`
   }
 }

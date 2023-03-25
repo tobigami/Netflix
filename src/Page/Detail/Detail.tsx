@@ -26,14 +26,14 @@ export default function Detail() {
     }
     getDetail()
   }, [type, id])
+
   const imgSrc = ImgC.origin(item.backdrop_path || item.poster_path)
-  const genres = item.genres
   if (!item || !id || !type) return null
   return (
     <div>
       {/* bg */}
       <div
-        className='mt-[-8rem] relative pt-[30%] w-full bg-center bg-cover bg-no-repeat
+        className='sm:mt-[-8rem] mt-[-6rem] relative sm:pt-[30%] pt-[100%] w-full bg-center bg-cover bg-no-repeat
                   before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:bg-black before:opacity-60
                   after:absolute after:content-[""] after:w-full after:h-[100px] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-[#0f0f0f] after:to-transparent
                   '
@@ -43,9 +43,9 @@ export default function Detail() {
       ></div>
       <div className='container mt-[-150px]'>
         {/* body */}
-        <div className='flex flex-row justify-center px-20 relative'>
+        <div className='flex flex-row justify-center lg:px-20 px-4 relative'>
           {/* poster */}
-          <div className='flex-shrink-0 flex-[30%]'>
+          <div className='flex-shrink-0 flex-[30%] hidden lg:block'>
             <img
               className='shadow-custom rounded-[30px] w-full transition-all scale-100 duration-700 ease-in-out'
               src={ImgC.w500(item.poster_path)}
@@ -53,9 +53,11 @@ export default function Detail() {
             />
           </div>
           {/* content */}
-          <div className='ml-8'>
+          <div className='lg:ml-8'>
             {/* title */}
-            <div className='text-6xl pb-8 font-bold'>{item.title || item.name}</div>
+            <div className='xl:text-[5rem] lg:text-[4rem] md:text-[3rem] text-[2rem] pb-8 font-bold'>
+              {item.title || item.name}
+            </div>
             {/* genres */}
             <div className='flex'>
               {item.genres &&
@@ -68,7 +70,7 @@ export default function Detail() {
                 })}
             </div>
             {/* over view */}
-            <div className='leading-6 mb-6'>{item.overview}</div>
+            <div className='sm:text-base text-xs leading-6 mb-6'>{item.overview}</div>
             {/* casts */}
             <Cast id={id} type={type} />
           </div>

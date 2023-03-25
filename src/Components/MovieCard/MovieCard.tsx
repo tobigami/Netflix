@@ -34,7 +34,7 @@ export default function MovieCard({ item, category }: Props) {
         </div>
         <div
           className='relative rounded-[30px] top-0 pt-[160%] bg-top bg-cover bg-no-repeat 
-          after:absolute after:content-[""] after:w-full after:h-[100px] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-[#0f0f0f] after:to-transparent
+          after:absolute after:content-[""] after:w-full after:h-[100px] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-[#0f0f0f] after:to-transparent after:rounded-[25px]
           '
           style={{
             backgroundImage: `url(${imgSrc})`

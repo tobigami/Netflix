@@ -1,18 +1,12 @@
-import { ReactNode } from 'react'
 import { useRoutes } from 'react-router-dom'
+import Search from 'src/Components/Search'
+import { routePath } from 'src/Constant/routePath'
 // import { routePath } from 'src/Constant/routePath'
 import MainLayout from 'src/Layouts'
 import Detail from 'src/Page/Detail'
 import Home from 'src/Page/Home'
 import Movie from 'src/Page/Movie'
 import TvSeries from 'src/Page/TvSeries'
-
-const routePath = {
-  home: '/',
-  detail: ':type/:id',
-  movie: '/movie',
-  tv: '/tv'
-}
 
 export default function useRoutersElements() {
   const routers = useRoutes([
@@ -25,15 +19,31 @@ export default function useRoutersElements() {
       )
     },
     {
-      path: ':type/:id',
+      path: routePath.movie,
       element: (
         <MainLayout>
-          <Detail />
+          <Movie />
         </MainLayout>
       )
     },
     {
-      path: routePath.movie,
+      path: routePath.movieTopRated,
+      element: (
+        <MainLayout>
+          <Movie />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.movieUpcoming,
+      element: (
+        <MainLayout>
+          <Movie />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.moviePopular,
       element: (
         <MainLayout>
           <Movie />
@@ -45,6 +55,46 @@ export default function useRoutersElements() {
       element: (
         <MainLayout>
           <TvSeries />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.tvPopular,
+      element: (
+        <MainLayout>
+          <TvSeries />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.tvTopRated,
+      element: (
+        <MainLayout>
+          <TvSeries />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.tvOnTheAir,
+      element: (
+        <MainLayout>
+          <TvSeries />
+        </MainLayout>
+      )
+    },
+    {
+      path: ':type/:id',
+      element: (
+        <MainLayout>
+          <Detail />
+        </MainLayout>
+      )
+    },
+    {
+      path: routePath.search,
+      element: (
+        <MainLayout>
+          <Search />
         </MainLayout>
       )
     }
