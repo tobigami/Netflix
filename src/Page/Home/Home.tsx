@@ -13,7 +13,7 @@ export default function Home() {
     <div>
       <Slider />
       {/* trending movie*/}
-      <div className='container mt-[-100px] sm:mt-0'>
+      <div className='container mt-[0px] sm:mt-0'>
         <MovieListHorizontal category={'movie'} title='top trending movie' type={'popular'}></MovieListHorizontal>
 
         <MovieListHorizontal category={'movie'} title='top rated  movie' type={'top_rated'}></MovieListHorizontal>

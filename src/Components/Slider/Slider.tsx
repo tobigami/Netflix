@@ -57,24 +57,25 @@ export default function Slider() {
         modules={[Autoplay]}
         grabCursor={true}
         spaceBetween={10}
-        slidesPerView={1}
+        slot={'wrapper-end'}
         // autoplay={{
         //   delay: 5000,
         //   disableOnInteraction: false
         // }}
         loop={true}
+        wrapperClass='items-end border-[2px]'
       >
         {movies.map((item, index) => {
-          const background = ImgC.origin(item.backdrop_path ? item.backdrop_path : item.poster_path)
+          const background = ImgC.origin(item.backdrop_path)
 
           return (
             <SwiperSlide key={index}>
               {({ isActive }) => (
                 // bg image
                 <div
-                  className='relative sm:py-36 pt-28 pb-20 w-full bg-center bg-cover bg-no-repeat
+                  className='relative sm:py-[11rem]  pt-28 pb-10 min-h-[572px]  bg-center bg-cover bg-no-repeat
                   before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:bg-black before:opacity-60
-                  after:absolute after:content-[""] after:w-full after:h-[100px] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-[#0f0f0f] after:to-transparent
+                  after:absolute after:content-[""] after:w-full after:h-[20%] after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-black after:to-transparent
                   '
                   style={{
                     backgroundImage: `url(${background})`
